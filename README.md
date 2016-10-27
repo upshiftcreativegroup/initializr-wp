@@ -20,5 +20,4 @@
 </ul>
 
 <h2>functions.php</h2>
-
 <p>There are some handy things in here. Will find time to list.</p>
