@@ -1,0 +1,1 @@
+<h1>WordPress theme boilerplate</h1>
