@@ -1,0 +1,74 @@
+
+
+$black: #000000;
+$white: #ffffff;
+$gold: #b28b33;
+$gray1: #63666a;
+$gray2: #75787b;
+$gray3: #919495;
+$gray4: #f2f2f2;
+
+
+@mixin trans($property: all,$duration: 150ms,$easing: ease-in-out,$delay: 0ms) {
+	-webkit-transition: $property $duration $easing $delay;
+	   -moz-transition: $property $duration $easing $delay;
+		 -o-transition: $property $duration $easing $delay;
+			transition: $property $duration $easing $delay;
+}
+
+
+@mixin valign($offset: 50%, $relative_offset: -50%) {
+	position: relative;
+	top: $offset;
+	-webkit-transform: translateY($relative_offset);
+	-ms-transform: translateY($relative_offset);
+	transform: translateY($relative_offset);	
+}
+
+@mixin atsg() {
+	font-family: "SackersHeavyGothic", sans-serif;
+}
+
+@mixin uni55() {
+	font-family: "UniversLTPro-55Roman", sans-serif;
+}
+@mixin uni45() {
+	font-family: "UniversLTPro-45Light", sans-serif;
+}
+@mixin placeholder($color) {
+	&::input-placeholder {
+	   color: $color;
+	}
+	&::-webkit-input-placeholder {
+	   color: $color;
+	}
+	&:-moz-placeholder { /* Firefox 18- */
+	   color: $color;
+	}
+	&::-moz-placeholder {  /* Firefox 19+ */
+	   color: $color;  
+	}
+	&:-ms-input-placeholder {  
+	   color: $color;  
+	}
+}
+
+@mixin gridpads($offset) {
+	margin-left: -$offset;
+	& > [class *=pure-u], .gform_fields > [class *=pure-u] {
+	  box-sizing: border-box;
+	  padding-left: $offset;
+	}
+}
+
+@mixin focus($color) {
+	outline: none;
+	-webkit-transition: border 200ms ease-in-out 0ms, box-shadow 200ms ease-in-out 0ms;
+	-moz-transition: border 200ms ease-in-out 0ms, box-shadow 200ms ease-in-out 0ms;
+	-o-transition: border 200ms ease-in-out 0ms, box-shadow 200ms ease-in-out 0ms;
+	transition: border 200ms ease-in-out 0ms, box-shadow 200ms ease-in-out 0ms;
+	&:focus {
+		border: 2px solid $color;
+		box-shadow: 0 0 5px $color;
+	}
+}

@@ -1,0 +1,55 @@
+a[href^=tel] {color: inherit;} // fix for apple device telephone link display
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.centert {text-align: center;}
+.leftt {text-align: left;}
+.rightt {text-align: right;}
+.justt {text-align: justify;}
+.caps {text-transform: uppercase!important;}
+.trans {
+	@include trans(all, 0ms);
+}
+.notrans {
+	@include trans(all, 0ms);
+}
+
+.texttransno {text-transform: none!important;}
+
+.valign {@include valign(50%);}
+
+.centerm {
+	margin-left: auto; margin-right: auto;
+	&.abs {left:0;right:0;}
+}
+
+.bg {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	&.top {
+		background-position: center top;
+	}
+}
+.clearfix {clear: both;} 
+.pure-g, .font0 {
+	font-size: 0;
+}
+.nocaps {text-transform: none!important;}
+
+.rel {position: relative;}
+.abs {position: absolute;}
+
+.atsg {font-family: 'AT Sackers Gothic', sans-serif;}
+.u55 {font-family: 'Univers55', serif;}
+
+.black {color: $black;}
+.white {color: $white;}
+
+
+.block {
+	&.white {background-color: $white;}
+}

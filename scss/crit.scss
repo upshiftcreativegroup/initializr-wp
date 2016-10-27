@@ -1,0 +1,64 @@
+@import 'variables.scss';
+@import 'base.scss';
+@import 'main-plus-normalize-plus-grid.scss';
+
+body {
+	margin: 0;
+	font-size: 16px;
+}
+.revlink {
+	text-decoration: none;
+	&:hover {text-decoration: underline;}
+}
+@media only screen and (min-width: 1px) {
+	.spacer20 {height:20px;}
+	.spacer40 {height:40px;}
+
+	.layer1 {z-index: 110;}
+	.layer2 {z-index: 120;}
+	.layer3 {z-index: 130;}
+	.layer4 {z-index: 140;}
+	.layer5 {z-index: 150;}
+	.linus {
+	    overflow: hidden;
+	    text-align: center;
+	     .hx {
+	     	position: relative;
+		    padding-left: 30px;
+		    padding-right: 30px;
+		    margin-left: 40px;
+		    margin-right: 40px;
+		    display: inline-block;
+	     	&::before, &::after {
+				top: 50%;
+				margin-top: -1px;
+				content: "";
+				background-color: $navy;
+				display: block;
+				height: 1px;
+				position: absolute;
+				top: 50%;
+				width: 700%;
+				max-width: 640px;
+	     	}
+	     	&::before {
+	     		right: 100%;
+	     	}
+	     	&:after {
+	     		left: 100%;
+	     	}
+	    }
+	}
+
+
+	
+}
+@media screen and (min-width: 641px) {
+}
+
+@media screen and (min-width: 901px) {
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+/* IE10+ CSS styles here. i know. */
+}

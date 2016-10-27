@@ -1,0 +1,123 @@
+
+
+$black: #000000;
+
+a[href^=tel] {color: inherit;} // fix for apple device telephone link display
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.centert {text-align: center;}
+.leftt {text-align: left;}
+.rightt {text-align: right;}
+.justt {text-align: justify;}
+.caps {text-transform: uppercase!important;}
+.trans {
+	-webkit-transition: all 120ms ease-in-out 0s!important;
+	-moz-transition: all 120ms ease-in-out 0s!important;
+	-o-transition: all 120ms ease-in-out 0s!important;
+	transition: all 120ms ease-in-out 0s!important;
+}
+.notrans {
+	-webkit-transition: all 0ms ease-in-out 0s!important;
+	-moz-transition: all 0ms ease-in-out 0s!important;
+	-o-transition: all 0ms ease-in-out 0s!important;
+	transition: all 0ms ease-in-out 0s!important;
+}
+
+@mixin trans($property,$duration,$easing,$delay) {
+	-webkit-transition: $property $duration $easing $delay;
+	   -moz-transition: $property $duration $easing $delay;
+		 -o-transition: $property $duration $easing $delay;
+			transition: $property $duration $easing $delay;
+}
+.texttransno {text-transform: none!important;}
+
+
+@mixin valign($offset) {
+	position: relative;
+	top: $offset;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);	
+}
+
+
+.centerm {margin-left: auto; margin-right: auto;}
+
+.bg {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	&.top {
+		background-position: center top;
+	}
+}
+.clearfix {clear: both;} 
+.pure-g, .font0 {
+	font-size: 0;
+}
+.nocaps {text-transform: none!important;}
+
+@mixin gridpads($offset) {
+	margin: 0 $offset;
+	& > [class *=pure-u], .gform_fields > [class *=pure-u] {
+	  box-sizing: border-box;
+	  padding: 0em $offset;
+	}
+}
+
+.rel {
+	position: relative;
+}
+
+
+.button {
+	@extend .trans;
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	max-width: 304px;
+	height: 44px;
+	padding:0;
+	background-color: transparent;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+}
+
+
+@media only screen and (min-width: 1px) {
+	.headblock {
+		width:100%;
+		//min-height: 33vh;
+		height: 56vw;
+		max-height: 70vh;
+		overflow: hidden;
+
+		background-color: #000000;
+	}
+
+	.videoman {
+		@include valign(50%);
+		width:100%;
+		height:auto;
+
+	}
+
+}
+
+@media screen and (min-width: 641px) {
+
+}
+
+@media screen and (min-width: 901px) {
+
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+/* IE10+ CSS styles go here. i know. */
+}
