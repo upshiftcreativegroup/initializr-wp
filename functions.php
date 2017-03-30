@@ -165,7 +165,7 @@ function special_nav_class($classes, $item){
 /*
 // comprehensive menu output
 class Menu_With_Description extends Walker_Nav_Menu {
-    function start_el(&$output, $item, $depth, $args) {
+    function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
         global $wp_query;
         $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
         
@@ -201,15 +201,3 @@ $walker = new Menu_With_Description;
 */
 
 
-
-/*
-// CPT pagination fix; try leaving this out.
-function my_post_count_queries( $query ) {
-  if (!is_admin() && $query->is_main_query()){
-    if(is_home()){
-       $query->set('posts_per_page', 1);
-    }
-  }
-}
-add_action( 'pre_get_posts', 'my_post_count_queries' );
-*/
