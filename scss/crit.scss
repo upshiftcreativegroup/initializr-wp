@@ -1,0 +1,151 @@
+@import 'variables.scss';
+@import 'base.scss';
+@import 'main-plus-normalize-plus-grid.scss';
+
+
+@media only screen and (min-width: 1px) {
+	#res {z-index: 1; position: absolute;}
+	.spacer5 {height:5px;}
+	.spacer20 {height:20px;}
+	.spacer50 {height:50px;}
+	.spacer100r {height:50px;}
+	
+	.layer0 {z-index: 100;}
+	.layer1 {z-index: 110;}
+	.layer2 {z-index: 120;}
+	.layer3 {z-index: 130;}
+	.layer4 {z-index: 140;}
+	.layer5 {z-index: 150;}
+	.layer6 {z-index: 160;}
+
+
+	.sec_nav, h4, .h4 {@include sec_nav();}
+	
+	.gutters_r1 {
+		@include gridpads(4vw);
+	}
+
+	.button {
+		text-decoration: none;
+		display: inline-block;
+		height: 36px;
+		width: 180px;
+		border: 1px solid $white;
+		background-color: $white;
+		text-align: center;
+		border-radius: 0;
+		span {
+			@include button();
+			@include valign(50%, -50%, relative);
+			color: $white;
+			display: block;
+		}
+		&.fitted {
+			width: auto;
+			padding: 0 1em;
+		}
+		&:hover {
+			border: 1px solid $gray1;
+			background-color: $white;
+			span {color: $gray1;}
+		}
+
+	}
+	.ulay {opacity:0.5;}
+	
+
+	.lpane, .rpane {
+		position: fixed;
+		overflow: hidden;
+		top: 0;
+		width:0;
+		height: 100vh;
+	}
+	.lpane {
+		top: 0;
+		left: 0;
+	}
+	.rpane {
+		top: 0;
+		right: 0;
+	}
+
+	.rpads {padding: 0 4.8vw;}
+
+	.container {
+		max-width: 1000px;
+		padding: 0 20px;
+	}
+
+	.ltc, .rtc {
+		text-align: center;
+	}
+	.rtl {
+		text-align: left;
+	}
+	.ctl {
+		text-align: left;
+	}
+
+
+	.img {
+		width: 100%;
+		height: auto;
+	}
+
+}
+@media screen and (max-width: 640px) {
+
+}
+@media screen and (min-width: 641px) {
+	#res {z-index: 2}
+
+	.gutters_r1 {
+		@include gridpads(5vw);
+	}
+	.spacer100r {height:100px;}
+
+
+}
+@media screen and (max-width: 900px) {
+
+}
+@media screen and (min-width: 901px) {
+	#res {z-index: 3}
+	.gutters_r1 {
+		@include gridpads(45px);
+	}
+
+	.ltc {
+		text-align: left;
+	}
+	.rtc {
+		text-align: right;
+	}
+	.rtl {
+		text-align: right;
+	}
+	.ctl {
+		text-align: center;
+	}
+	.ctr {text-align: center;}
+
+}
+
+@media screen and (min-width: 1601px) {
+
+	.bigbar {
+		//width: 1524px;
+		height: 624px;
+		padding: 64px;
+		&.minibar {
+			height: 312px;
+
+		}
+	}
+
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+/* IE10+ CSS styles here. i know. */
+}

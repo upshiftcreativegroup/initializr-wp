@@ -1,0 +1,332 @@
+@import 'variables.scss';
+
+/*! main */
+
+@media only screen and (min-width: 1px) {
+	
+	ul, li {
+		list-style: none outside;
+		margin: 0;
+		padding: 0;
+	}
+
+	h1, .h1 {@include h1();}
+	h2, .h2 {@include h2();}
+	h3, .h3 {@include h3();}
+	h4 {margin-bottom: 0.6em;}
+	p, .p1 {@include p();}
+
+	.logged-in.admin-bar header, .logged-in.admin-bar .header {
+		top: 32px;
+	}
+
+	.mc_embed_signup_scrol {
+		position: relative;
+		width: 200px;
+		background-color: $white;
+	}
+	.mc-field-group .email {
+		@include button();
+		display: inline-block;
+		height: 36px;
+		width:calc(100% - 34px);
+		border:0;
+		border-radius: 0;
+		//color: $gray1;
+		padding-left: 5px;
+		@include placeholder($gray1);
+	}
+	#mc-embedded-subscribe {
+		@include p();
+		right: 0;
+		background-color: transparent;
+		display: inline-block;
+		//color: $gray1;
+		width:32px;
+		height:36px;
+		border-radius: 0;
+		border: none;
+	}
+
+	.map-button {
+		display: block;
+		padding: 0.2em 0;
+		cursor: pointer;
+	}
+	.map-wrap-left {
+		@include trans();
+		@include valign(50%, -50%, absolute);
+		overflow: hidden;
+		height: 30px;
+		width: 30px;
+		background-color: $white;
+		padding: 3px 3px;
+		.map-buttons-full-head {text-align: center;}
+		&.active {
+			.map-buttons-full-head {text-align: right;}
+			height: 270px;
+			width: 200px;
+			padding: 5px 10px;
+		}
+	}
+
+	#map-buttons {
+		width: 156px;
+		margin: 0 auto;
+	}
+	.map-buttons-full-head {text-align: right; font-size: 20px; color: $gray1; cursor: pointer;}
+	.map-buttons-mobile-head {display: none;}
+	.inactive-button {display:inline;}
+	.active-button {display:none;}
+	.active {
+		.inactive-button {display:none;}
+		.active-button {display:inline;}
+	}
+	
+	.gal_cap {
+		@include trans(opacity, 200ms, linear, 100ms);
+
+		opacity: 0;
+		color: $white;
+		text-shadow: 0px 0px 10px rgba(0,0,0, 0.5);
+		h2 {@include h2(14px);}
+	}
+
+	.balign {
+		@include valign(100%, -100%, absolute);
+		padding: 0 0 10px 10px;
+	}
+
+
+	.gform_wrapper {text-align:left;}
+	
+	.gform_body {
+	    margin-left: -10px;
+		li {
+			padding-left: 10px;
+		}
+	}
+	.gfield {
+		opacity: 1;
+		display: inline-block;
+		width: 100%;
+		margin: 0 0 25px 0;
+		label {
+			@include sec_nav();
+			display: block;
+			margin-bottom: 0.5em;
+			color: $white;
+			text-shadow: 0px 0px 5px rgba(0,0,0, 0.2);
+		}
+		input, textarea, select {
+			@include p();
+			//@include placeholder($white);
+			width: 100%;
+			padding-left:1em;
+			color: $white;
+			border-radius: 0;
+			height:2.8em;
+			border: 2px solid $white;
+			background-color: transparent;
+			-webkit-appearance: none;
+			-webkit-border-radius: 0px;
+			vertical-align: top;
+		}
+		textarea {
+			height:8em;
+		}
+		option {color: $black;}
+
+		&.gform_hidden {display:none;}
+
+		&.gfield_error {
+			input, textarea, select, option {
+				border: 1px solid red;
+				@include placeholder(red);
+			}
+		}
+	}
+	.ginput_container_select {
+		z-index: 10;
+		position: relative;
+		&::after {
+			content: "\f107";
+			font-family: "FontAwesome";
+			@include valign(50%, -50%, absolute);
+			right: 10px;
+			z-index: 10;
+			font-size: 30px;
+			color: $white;
+		}
+		select {
+			position: relative;
+			z-index: 15;
+			-moz-appearance: none;
+		}
+	}
+	.calendar_field {
+		.ginput_container {
+			z-index: 10;
+			position: relative;
+		}
+		.ginput_container::after {
+			content: "\f133";
+			font-family: "FontAwesome";
+			@include valign(50%, -50%, absolute);
+			right: 10px;
+			z-index: 10;
+			font-size: 30px;
+			color: $white;
+		}
+		input {
+			position: relative;
+			z-index: 15;
+		}
+	}
+	.gform_footer {
+		text-align: right;
+		input {
+			@include button();
+			background-color: $white;
+			color: $gray1;
+		}
+	}
+	.validation_message, .validation_error {
+		display: none;
+	}
+	.gform_confirmation_wrapper {
+		@include p();
+		font-weight: bold;
+		color: $white;
+	}
+
+	.breakme {
+		overflow-wrap: break-word;
+		word-break: break-word;
+	}
+
+	/* =WordPress Core
+	-------------------------------------------------------------- */
+	.wp-caption {
+	    background: #fff;
+	    border: 1px solid #f0f0f0;
+	    max-width: 96%; /* Image does not overflow the content area */
+	    padding: 5px 3px 10px;
+	    text-align: center;
+	}
+
+	.wp-caption.alignnone {
+	    margin: 5px 20px 20px 0;
+	}
+
+	.wp-caption.alignleft {
+	    margin: 5px 20px 20px 0;
+	}
+
+	.wp-caption.alignright {
+	    margin: 5px 0 20px 20px;
+	}
+
+	.wp-caption img {
+	    border: 0 none;
+	    height: auto;
+	    margin: 0;
+	    max-width: 98.5%;
+	    padding: 0;
+	    width: auto;
+	}
+
+	.wp-caption p.wp-caption-text {
+	    font-size: 11px;
+	    line-height: 17px;
+	    margin: 0;
+	    padding: 0 4px 5px;
+	}
+
+
+}
+@media screen and (max-width: 640px) {
+
+
+}
+@media screen and (min-width: 641px) {
+
+	.gform_wrapper {
+
+		.gfield {
+			width: 50%;
+			&.full_width {
+				width: 100%;
+			}
+		}
+	}
+	.gform_footer {
+		padding-top:20px;
+	}
+
+	.tblock {display: table;}
+	.tcell {display: table-cell; vertical-align: middle;}
+
+	.alignnone {
+	    margin: 5px 20px 20px 0;
+	}
+
+	.aligncenter,
+	div.aligncenter {
+	    display: block;
+	    margin: 5px auto 5px auto;
+	}
+
+	.alignright {
+	    float:right;
+	    margin: 5px 0 20px 20px;
+	}
+
+	.alignleft {
+	    float: left;
+	    margin: 5px 20px 20px 0;
+	}
+
+	a img.alignright {
+	    float: right;
+	    margin: 5px 0 20px 20px;
+	}
+
+	a img.alignnone {
+	    margin: 5px 20px 20px 0;
+	}
+
+	a img.alignleft {
+	    float: left;
+	    margin: 5px 20px 20px 0;
+	}
+
+	a img.aligncenter {
+	    display: block;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+	.map-wrap-left {
+		&.active {
+			height: 290px;
+			width: 290px;
+		}
+	}
+
+}
+
+@media screen and (min-width: 901px) {
+
+}
+@media screen and (min-width: 1061px) {
+
+}
+
+@media screen and (min-width: 1601px) {
+
+
+
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+/* IE10+ CSS styles here. i know. */
+}

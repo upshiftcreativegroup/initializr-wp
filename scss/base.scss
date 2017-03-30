@@ -1,0 +1,86 @@
+a[href^=tel] {color: inherit;} // fix for apple device telephone link display
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.centert {text-align: center;}
+.leftt {text-align: left;}
+.rightt {text-align: right;}
+.justt {text-align: justify;}
+.caps {text-transform: uppercase!important;}
+.trans {
+	@include trans(all, 0ms);
+}
+.notrans {
+	@include trans(all, 0ms);
+}
+
+.texttransno {text-transform: none!important;}
+
+.valign {@include valign(50%);}
+
+.centerm {
+	margin-left: auto; margin-right: auto;
+	&.abs {left:0;right:0;}
+}
+
+body {
+	margin: 0;
+	font-size: 16px;
+}
+.revlink {
+	text-decoration: none;
+	&:hover {text-decoration: underline;}
+}
+.nun {text-decoration: none;}
+.nom {margin:0;}
+.bg {
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	&.top {
+		background-position: center top;
+	}
+}
+.clearfix {clear: both;} 
+.pure-g, .font0 {
+	font-size: 0;
+}
+.nocaps {text-transform: none!important;}
+
+.rel {position: relative;}
+.abs {position: absolute;}
+
+.oflo {overflow: hidden;}
+
+
+.object_fit {
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+img.object_fit {
+	position: absolute;
+	object-position: 50% 50%;
+	object-fit: cover;
+}
+
+
+
+.bl {display: block;}
+
+.black {color: $black;}
+.white {color: $white;}
+.gray1 {color: $gray1;}
+
+.block {
+	&.white {background-color: $white;}
+	&.black {background-color: $black;}
+	&.gray1 {background-color: $gray1;}
+
+	&.transparent {background-color: transparent;}
+
+}
