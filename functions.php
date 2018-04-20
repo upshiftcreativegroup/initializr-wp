@@ -30,7 +30,11 @@ function my_jquery_enqueue() {
         )
     );
 
-    wp_localize_script( 'init', 'ajax_gravityboy_params', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+    wp_localize_script( 'init', 'ajax_gravityboy_params', array(
+        'ajax_url' => admin_url( 'admin-ajax.php' ),
+        'post_id'  => get_the_id()
+
+    ) );
 }
 
 // admin styles
