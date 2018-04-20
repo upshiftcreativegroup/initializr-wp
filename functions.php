@@ -1,6 +1,5 @@
 <?php 
 
-
 // NQ
 if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
 function my_jquery_enqueue() {
@@ -9,66 +8,143 @@ function my_jquery_enqueue() {
 
     wp_deregister_script('jquery');
     wp_deregister_script( 'wp-embed' );
-    //wp_register_script('jquery', bloginfo('template_url') . "/js/vendor/jquery-1.11.2.js", array(), null, true);
-    wp_register_script('jquery', get_bloginfo('template_url') . "/js/vendor/jquery-3.1.1.js", array(), null, false);
+    wp_register_script('jquery', get_bloginfo('template_url') . "/js/vendor/jquery-3.2.1.min.js", array(), $q_string, false);
     wp_register_script('init', get_bloginfo('template_url') . "/js/init.js", array('jquery'), $q_string, true);
     wp_register_script('plugins', get_bloginfo('template_url') . "/js/plugins.js", array('jquery'), $q_string, true);
     wp_register_script('main', get_bloginfo('template_url') . "/js/main.js", array('plugins'), $q_string, true);
     
     wp_register_style( 'crit', get_template_directory_uri() . '/css/crit.css', array(), $q_string, false );
 
-    wp_dequeue_script('plan_selector_js');
-    wp_dequeue_style('plan_selector_style');
 
+    wp_enqueue_script('jquery';
     wp_enqueue_script('init');
     wp_enqueue_style('crit');
 
     wp_localize_script("init",
         "site",
         array(
+            "home_url"      => home_url(),
             "theme_path"    => get_bloginfo('template_url'),
             "plugins_path"  => plugins_url(),
-            "version"       => $q_string
+            "qstring"       => $q_string
         )
     );
+
+    wp_localize_script( 'init', 'ajax_gravityboy_params', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 }
+
+// admin styles
+function load_custom_wp_admin_style() {
+    $q_string = '0.01';
+    wp_register_style( 'custom_wp_admin_css', get_template_directory_uri() . '/css/admin.css', false, $q_string );
+    //wp_enqueue_style( 'custom_wp_admin_css' );
+
+    wp_register_script( 'custom_wp_admin_js', get_template_directory_uri() . '/js/admin.js', false, $q_string );
+    //wp_enqueue_script( 'custom_wp_admin_js' );
+}
+
+
+add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
+
+add_action('wp_ajax_gravityboy', 'ajax_gravityboy');
+add_action('wp_ajax_nopriv_gravityboy', 'ajax_gravityboy');
 
 // bye emoji
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' ); 
 
 
-// Menu Registration
-register_nav_menus(array(
-	'main_menu'    => 'Main Menu',
-	'secondary_menu'  => 'Secondary Menu'
-));
+// dequeue gravityforms scripts.
+add_action( 'gform_enqueue_scripts', 'dequeue_habuncha_scripts', 10, 2 );
+function dequeue_habuncha_scripts( $form, $is_ajax ) {
+    /*
+    if ( is_front_page() || is_page('contact') ) {
+        wp_dequeue_script( 'gform_gravityforms' );
+        wp_dequeue_script( 'gform_json' );
+        wp_dequeue_script( 'gform_placeholder' );
+    }
+    */
+}
 
+add_filter( 'gform_ajax_spinner_url', 'spinner_url', 10, 2 );
+function spinner_url( $image_src, $form ) {
+    return false;
+}
+
+
+// manu
+add_action( 'after_setup_theme', 'register_my_menu' );
+function register_my_menu() {
+  register_nav_menu( 'main', 'Main Menu' );
+}
 
 // image sizes
 if ( function_exists( 'add_theme_support' ) ) {
-	add_theme_support( 'post-thumbnails' );
-	add_image_size( 'jumbo', 1600, 9999, false ); // e.g. 172px width, 220px height; false = soft crop; true = hard crop
+    add_theme_support( 'post-thumbnails' );
+    add_image_size( 'xl', 1400, 9999, false ); // e.g. 172px width, 220px height; false = soft crop; true = hard crop
+    add_image_size( 'xxl', 2000, 9999, false );
 }
 
 
-// CHANGE EXCERPT LENGTH FOR DIFFERENT POST TYPES
-/*
-function isacustom_excerpt_length($length) {
-	global $post;
-	return 30;
-}
-add_filter('excerpt_length', 'isacustom_excerpt_length');
-*/
 
-/*
-//custom excerpt ellipsis
-function new_excerpt_more( $more ) {
-    return 'custom ellipsis here...';
-}
-add_filter('excerpt_more', 'new_excerpt_more');
-*/
 
+function ajax_gravityBoy() {
+
+    $query_data = $_GET;
+    $form_id = ($query_data['form_id']) ? $query_data['form_id'] : false;
+    $grav_html = '';
+
+    $grav_html .= gravity_form( $form_id, false, false, false, null, true, null, false );
+    echo $grav_html;
+    die();
+}
+
+
+
+function ajax_sampleApiCall() {
+    //delete_transient( 'weatherboy' );
+
+    // Do we have this information in our transients already?
+    $transient = get_transient( 'weatherboy' );
+
+    // Yep!  Just return it and we're done.
+    if( !empty( $transient ) ) {
+        // The function will return here every time after the first time it is run, until the transient expires.
+        $output = $transient;
+        $output->is_transient = 1;
+
+    } else {
+
+        $c_error = 0;
+        $api_arr = array();
+        $api_url = 'https://api.sampleURL.com/apiCall?key=youGetIt';
+        $ch = curl_init();
+        // set URL to download
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        $pre_output = curl_exec($ch);
+        // close the curl resource, and free system resources
+
+        if(curl_error($ch)) {
+            echo '<!-- error:' . curl_error($ch) . '-->';
+            $c_error = 1;
+        }
+        curl_close($ch);
+
+        if($c_error == 0) {
+            $output = json_decode($pre_output);
+            set_transient( 'apiStuff', $output, 5 * 60 ); // 5 mins
+        }
+
+        $output->is_transient = 0;
+    }
+    
+    $output = json_decode(json_encode($output), true);
+    print json_encode($output);
+    die();
+}
 
 /*
 //change the default validation message.
@@ -112,7 +188,6 @@ add_action( 'init', 'revcon_change_post_object' );
 */
 
 
-
 /*
 // View page via specific template
 function add_print_query_vars($vars) {
@@ -136,30 +211,6 @@ function my_template_redirect_2322()
 }
 */
 
-
-
-/*
-// add menu li classes depending on menu location
-add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
-function special_nav_class($classes, $item){
-
-    $menu_locations = get_nav_menu_locations();
-
-    if ( has_term($menu_locations['main'], 'nav_menu', $item) ) {
-        $classes[] = 'grid__item palm--one-whole lap--one-sixth desk--one-sixth menu-link';
-    return $classes;
-    } elseif ( has_term($menu_locations['newsmenu'], 'nav_menu', $item) ) {
-             $classes[] = "grid__item palm--one-whole lap--one-fifth desk--one-fifth";
-    return $classes;
-    } elseif ( has_term($menu_locations['aboutmenu'], 'nav_menu', $item) ) {
-             $classes[] = "grid__item palm--one-whole lap--one-third desk--one-third";
-    return $classes;
-    } else {
-             $classes[] = ""; // nothing
-    return $classes;
-    }
-}
-*/
 
 
 /*
@@ -199,5 +250,3 @@ class Menu_With_Description extends Walker_Nav_Menu {
 $walker = new Menu_With_Description; 
 'walker'          => $walker
 */
-
-
