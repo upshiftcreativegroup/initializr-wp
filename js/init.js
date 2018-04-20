@@ -21,7 +21,7 @@ gravityBoyJs.src = site.theme_path + '/js/gravityboy.js'+qstring;
 wpEmbed.sr = site.theme_path + '/js/gravityboy.js'+qstring;
 
 
-// gravity forms scripts because we're gonna load it on our own terms
+// gravity forms scripts because we're gonna load it on our own terms. they get called in gravityboy.js.
 jsonJs = document.createElement('script'),
 gravityformsJs = document.createElement('script'),
 placeholdersJs = document.createElement('script');
