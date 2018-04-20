@@ -1,0 +1,11 @@
+*.mp4
+*.ogv
+*.webm
+video/**
+fonts/**
+
+*.idml
+*.indd
+*.pdf
+
+*-dist.js
