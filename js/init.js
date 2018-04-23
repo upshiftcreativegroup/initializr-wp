@@ -6,8 +6,6 @@ gravityBoyJs = document.createElement('script'), // ajax in gforms
 fancyBoxJs = document.createElement('script'),
 wpEmbed = document.createElement('script');
 
-<script type='text/javascript' src='https://linkliving.com/wp-includes/js/wp-embed.min.js?ver=4.9.3'></script>
-
 pluginsJs.type = 'text/javascript',
 mainJs.type = 'text/javascript',
 gravityBoyJs.type = 'text/javascript',
@@ -18,7 +16,7 @@ pluginsJs.src = site.theme_path + '/js/plugins.js'+qstring,
 mainJs.src = site.theme_path + '/js/main-dist.js'+qstring,
 fancyBoxJs.src = site.theme_path + '/js/vendor/jquery.fancybox.min.js'+qstring,
 gravityBoyJs.src = site.theme_path + '/js/gravityboy.js'+qstring;
-wpEmbed.sr = site.theme_path + '/js/gravityboy.js'+qstring;
+wpEmbed.src = site.theme_path + '/js/gravityboy.js'+qstring;
 
 
 // gravity forms scripts because we're gonna load it on our own terms. they get called in gravityboy.js.
