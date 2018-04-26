@@ -3,14 +3,13 @@
 <p>Hi, you can use this as a starting point for your WordPress theme. FontAwesome version is <a href="https://fontawesome.com/icons" target="_blank">5.0.8</a>.</p>
 
 <h2>init.js</h2>
-<p>This script loader loads any specified files on window load (or whenever you want). The result is that this and jQuery remain the only render-blocking scripts on page, helping to appease Google PageSpeed. You can try dequeueing jQuery and loading it through init.js instead, but do so at your own risk as a lot of WP and plugin scripts seem to depend on it.</p>
-
+<p>This script loader loads any specified files on window load (or whenever you want). The result is that this and jQuery remain the only render-blocking scripts on page, decreasing first initial load weight. You can try dequeueing jQuery and loading it through init.js instead, but do so at your own risk as a lot of WP and plugin scripts seem to depend on it.</p>
 
 
 <h2>Included in plugins.js</h2>
 <p><i>Some</i> of these have jQuery as a dependency. All are located in /js/plugins.js. Associated stylesheets are in /css/ or /scss/.</p>
 
-<h3>Probably will need jQuery</h3>
+<h3>Needs jQuery</h3>
 <ul>
 	<li>FancyBox v3.0.47</li>
 	<li>Slick Carousel v1.6.0</li>
@@ -32,7 +31,7 @@
 	<li>Enqueue init.js and crit.css.</li>
 	<li>Localize variables for use in scripts called through init.js</li>
 	<li>Remove WP emoji JS and print styles CSS</li>
-	<li>Remove gravity forms spinner. Forget that ugly thing.</li>
+	<li>Remove gravity forms spinner.</li>
 	<li>Nav menu registration</li>
 	<li>Custom images size(s)</li>
 	<li>gravityBoy: ajax load in a gravity form on command with js/gravityboy.js. Currently only works with one form per page.</li>
