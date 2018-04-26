@@ -45,17 +45,16 @@
 </ul>
 
 <h2>Did somebody say Google Pagespeed?</h2>
-<p>Yeah, anybody that even thinks the site loaded a little slow. Like your boss, or the client's marketing manager looking for performance metrics.</p>
+<p>Using the theme's included resources and following these guidelines will usually get you in the good/green graces of Google Pagespeed Insights.</p>
 <ul>
 	<li>Eliminate render-blocking JavaScript and CSS in above-the-fold content: Try to run all of your scripts through init.js.</li>
 	<li>Eliminate render-blocking JavaScript and CSS in above-the-fold content: Split your CSS into a critical style sheet (crit.css), and then load in the rest of your styles later, like on window load (see pack.css in init.js.</li>
 	<li>Prioritize visible content: Defer loading any below-the-fold or initially hidden media.</li>
-	<li>Minify CSS and JS via your compiler or preprocessor.</li>
 	<li>Enable compression: set gzip/compression parameters in host or .htaccess.</li>
 	<li>Leverage browser caching: Define browser cache parameters in host or .htaccess.</li>
 	<li>Optimize images: use minified images from the .zip that Pagespeed Insights gives you. AFAIK that's the only minification it sees as valid.</li>
 	<li>Reduce server response time: get a really simple server-side caching. staruc likes <a href="https://wordpress.org/plugins/cache-enabler/" target="_blank">KeyCDN's Cache Enabler</a>.</li>
+	<li>Minify CSS and JS via your compiler or preprocessor.</li>
 </ul>
-
 
 
