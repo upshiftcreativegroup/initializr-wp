@@ -16,7 +16,7 @@ function my_jquery_enqueue() {
     wp_register_style( 'crit', get_template_directory_uri() . '/css/crit.css', array(), $q_string, false );
 
 
-    wp_enqueue_script('jquery';
+    wp_enqueue_script('jquery');
     wp_enqueue_script('init');
     wp_enqueue_style('crit');
 

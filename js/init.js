@@ -33,7 +33,7 @@ maskedInputJs.src = site.plugins_path + '/gravityforms/js/jquery.maskedinput.min
 
 
 pluginsJs.setAttribute('async', ''), 
-mainJs.setAttribute('async', ''), 
+mainJs.setAttribute('async', '');
 
 var packCss = document.createElement('link'), fancyboxCss = document.createElement('link');
 packCss.rel = 'stylesheet', fancyboxCss.rel = 'stylesheet';
