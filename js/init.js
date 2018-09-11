@@ -13,7 +13,7 @@ fancyBoxJs.type = 'text/javascript',
 wpEmbed.type = 'text/javascript';
 
 pluginsJs.src = site.theme_path + '/js/plugins.js'+qstring,
-mainJs.src = site.theme_path + '/js/main-dist.js'+qstring,
+mainJs.src = site.theme_path + '/js/main.js'+qstring,
 fancyBoxJs.src = site.theme_path + '/js/vendor/jquery.fancybox.min.js'+qstring,
 gravityBoyJs.src = site.theme_path + '/js/gravityboy.js'+qstring;
 wpEmbed.src = site.theme_path + '/js/gravityboy.js'+qstring;

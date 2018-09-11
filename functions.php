@@ -8,7 +8,7 @@ function my_jquery_enqueue() {
 
     wp_deregister_script('jquery');
     wp_deregister_script( 'wp-embed' );
-    wp_register_script('jquery', get_bloginfo('template_url') . "/js/vendor/jquery-3.2.1.min.js", array(), $q_string, false);
+    wp_register_script('jquery', get_bloginfo('template_url') . "/js/vendor/jquery-3.3.1.min.js", array(), $q_string, false);
     wp_register_script('init', get_bloginfo('template_url') . "/js/init.js", array('jquery'), $q_string, true);
     wp_register_script('plugins', get_bloginfo('template_url') . "/js/plugins.js", array('jquery'), $q_string, true);
     wp_register_script('main', get_bloginfo('template_url') . "/js/main.js", array('plugins'), $q_string, true);
