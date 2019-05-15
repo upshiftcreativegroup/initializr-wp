@@ -1,0 +1,307 @@
+$black: #000000;
+$white: #ffffff;
+$gray1: #75787B;
+$gray2: #989A9C;
+$gray3: #BABBBD;
+$gray4: #D9D9D6;
+$gray5: #ECECEA;
+$tan1: #AFA9A0;
+$tan2: #C3BFB8;
+$blue: #29588C;
+
+$blue: #3f5364;
+$moss: #3f695b;
+$bone: #d6d1ca;
+$bone1: #d6d1ca;
+$bone2: #ebe6e4;
+$bonet: #ebe6e4;
+$bone3: #f0f0ee;
+$bone4: #f5f5f3;
+$gray1: #404041;
+$gray2: #54565b;
+$gray3: #99979a;
+$red: #a85348;
+$brown: #6f625a;
+
+
+$cubic_out: cubic-bezier(0.22, 0.61, 0.36, 1);
+$quad: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+
+@mixin trans($property: all,$duration: 150ms,$easing: ease-in-out,$delay: 0ms) {
+	-webkit-transition: $property $duration $easing $delay;
+	   -moz-transition: $property $duration $easing $delay;
+		 -o-transition: $property $duration $easing $delay;
+			transition: $property $duration $easing $delay;
+}
+
+@mixin valign($offset: 50%, $relative_offset: -50%, $pos: relative) {
+	position: $pos;
+	top: $offset;
+	-webkit-transform: translateY($relative_offset);
+	-ms-transform: translateY($relative_offset);
+	transform: translateY($relative_offset);	
+}
+
+@mixin din() {
+	font-family: sans-serif;
+}
+@mixin yeseva() {
+	font-family: Georgia, serif;
+}
+@mixin loaded_din() {
+	font-family: 'Montserrat', sans-serif;
+}
+@mixin loaded_yeseva() {
+	font-family: 'klinic_slab', Georgia, serif;
+	font-weight: normal;
+}
+
+@mixin placeholder($color) {
+	&::input-placeholder {
+	   color: $color;
+	}
+	&::-webkit-input-placeholder {
+	   color: $color;
+	}
+	&:-moz-placeholder { /* Firefox 18- */
+	   color: $color;
+	}
+	&::-moz-placeholder {  /* Firefox 19+ */
+	   color: $color;  
+	}
+	&:-ms-input-placeholder {  
+	   color: $color;  
+	}
+}
+
+@mixin gridpads($offset) {
+	margin-left: -$offset;
+	& > [class *=pure-u], .gform_fields > [class *=pure-u] {
+	  box-sizing: border-box;
+	  padding-left: $offset;
+	}
+}
+
+@mixin focus($color) {
+	outline: none;
+	-webkit-transition: border 200ms ease-in-out 0ms, box-shadow 200ms ease-in-out 0ms;
+	-moz-transition: border 200ms ease-in-out 0ms, box-shadow 200ms ease-in-out 0ms;
+	-o-transition: border 200ms ease-in-out 0ms, box-shadow 200ms ease-in-out 0ms;
+	transition: border 200ms ease-in-out 0ms, box-shadow 200ms ease-in-out 0ms;
+	&:focus {
+		border: 2px solid $color;
+		box-shadow: 0 0 5px $color;
+	}
+}
+/*
+100 Thin (Hairline)
+200 Extra Light (Ultra Light)
+300 Light
+400 Normal
+500 Medium
+600 Semi Bold (Demi Bold)
+700 Bold
+800 Extra Bold (Ultra Bold)
+900 Black (Heavy)
+*/
+
+@mixin font-size($size) {
+	font-size: $size;
+	@media screen and (max-width: 640px) {
+		font-size: ($size * 0.75);
+	}
+	@media screen and (min-width: 1601px) {
+		font-size: ($size * 1.25);
+	}
+}
+@mixin font-size-big($size) {
+	font-size: $size;
+	@media screen and (min-width: 1601px) {
+		font-size: ($size * 1.25);
+	}
+}
+
+@mixin h1($size: 12px) {
+	@include din();
+	@include font-size($size);
+	font-weight: 700;
+	line-height: 1.833em;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	margin-bottom: 0.42em;
+}
+@mixin h2($size: 18px) {
+	@include din();
+	@include font-size($size);
+	font-weight: 500;
+	line-height: 1.667em;
+	letter-spacing: 0.3em;
+	text-transform: uppercase;
+	margin-bottom: 0.83em;
+}
+@mixin h3($size: 15px) {
+	@include din();
+	@include font-size($size);
+	font-weight: 700;
+	line-height: 1.467em;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+@mixin h3_bigger($size: 103px) { // kill
+	@include yeseva();
+	@include font-size($size);
+	font-weight: 400;
+	line-height: 0.65em;
+	letter-spacing: 0.025em;
+	text-transform: lowercase;
+}
+@mixin h4($size: 16px) {
+	@include din();
+	@include font-size($size);
+	font-weight: 600;
+	line-height: 1.2em;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+@mixin h5($size: 14px) {
+	@include yeseva();
+	@include font-size-big($size);
+	font-weight: 600;
+	line-height: 1.57em;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+}
+@mixin h6($size: 116px) {
+	@include yeseva();
+	@include font-size($size);
+	font-weight: normal;
+	line-height: 1.2em;
+	letter-spacing: 0.025em;
+	text-transform: none;
+}
+@mixin h7($size: 71px) {
+	@include yeseva();
+	@include font-size($size);
+	font-weight: normal;
+	line-height: 1.2em;
+	letter-spacing: 0.025em;
+	text-transform: none;
+}
+@mixin p($size: 30px) {
+	@include yeseva();
+	@include font-size($size);
+	font-weight: 300;
+	line-height: 1.4em;
+	letter-spacing: 0em;
+	text-transform: none;
+}
+@mixin p2($size: 15px) {
+	@include din();
+	@include font-size-big($size);
+	font-weight: 700;
+	line-height: 1.467em;
+	letter-spacing: 0em;
+	text-transform: none;
+}
+@mixin p3($size: 13px) {
+	@include din();
+	@include font-size-big($size);
+	font-weight: 300;
+	line-height: 1.615em;
+	letter-spacing: 0em;
+	text-transform: none;
+}
+@mixin p4($size: 14px) {
+	@include din();
+	@include font-size-big($size);
+	font-weight: 400;
+	line-height: 1.214em;
+	letter-spacing: 0.03em;
+	text-transform: none;
+}
+@mixin list($size: 12px) {
+	@include din();
+	@include font-size-big($size);
+	font-weight: 400;
+	line-height: 2em;
+	letter-spacing: 0em;
+}
+@mixin footer($size: 12px) {
+	@include loaded_din();
+	font-size: $size;
+	font-weight: 400;
+	line-height: 1.42em;
+	letter-spacing: 0em;
+	text-transform: none;
+}
+
+@mixin jumbo($size: 60px) {
+	@include din();
+	font-size: $size;
+	font-weight: 500;
+	line-height: 1.25em;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+@mixin nav1($size: 45px) {
+	@include loaded_yeseva();
+	@include font-size($size);
+	font-weight: 300;
+	line-height: 1.311em;
+	letter-spacing: 0.125em;
+	text-transform: uppercase;
+}
+@mixin nav2($size: 24px) {
+	@include loaded_din();
+	@include font-size($size);
+	font-weight: 400;
+	line-height: 1.214em;
+	letter-spacing: 0.3em;
+	text-transform: uppercase;
+}
+
+@mixin form($size: 12px) {
+	@include din();
+	@include font-size-big($size);
+	font-weight: 400;
+	line-height: 3em;
+	letter-spacing: 0em;
+	text-transform: uppercase;
+}
+@mixin button($size: 13px) {
+	@include din();
+	@include font-size-big($size);
+	font-weight: 400;
+	line-height: 1.15em;
+	letter-spacing: 0em;
+	text-transform: uppercase;
+}
+@mixin button2($size: 13px) {
+	@include din();
+	@include font-size($size);
+	font-weight: 600;
+	line-height: 2em;
+	letter-spacing: 0.170em;
+	text-transform: uppercase;
+}
+@mixin smalli($size: 13px) {
+	@include loaded_yeseva();
+	@include font-size-big($size);
+	font-weight: 300;
+	font-style: italic;
+	line-height: 2.923em;
+	letter-spacing: 0em;
+}
+@mixin small($size: 12px) {
+	@include loaded_din();
+	@include font-size-big($size);
+	font-weight: 500;
+	line-height: 1.167em;
+	letter-spacing: 0.025em;
+}
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import 'vars.scss';
 @import 'base.scss';
 @import 'main-plus-normalize-plus-grid.scss';
 
@@ -18,22 +18,68 @@
 	.layer5 {z-index: 150;}
 	.layer6 {z-index: 160;}
 
+	ul, li {
+		list-style: none outside;
+		margin: 0;
+		padding: 0;
+	}
 
-	.sec_nav, h4, .h4 {@include sec_nav();}
-	
+
+	h1, .h1 {@include h1();}
+	h2, .h2 {@include h2();}
+	h3, .h3 {@include h3();}
+	h3.bigger, .h3.bigger {@include h3_bigger();}
+	h4, .h4 {@include h4();}
+	h5, .h5 {@include h5();}
+	h6, .h6 {@include h6();}
+	.h7 {@include h7();}
+	.button1, .button {@include button();}
+	.button2 {@include button2();}
+	p, .p1 {@include p();}
+	.p2 {@include p2();}
+	.p3 {@include p3();}
+	.p4 {@include p4();}
+	.smalli {@include smalli();}
+	small, .small {@include small();}
+	.form {@include form();}
+	.footer {@include footer();}
+	.list{
+		@include list();
+		border-bottom: 1.5px solid;
+		margin-bottom: 1.167em;
+		padding-bottom: 1.167em;
+	}
+	.jumbo {@include jumbo();}
+
+	p {
+		margin-top: 0.5em;
+	}
+
+	// m i doin this rite
+	.fl {
+
+	}
+
+	.gutters_1 {
+		@include gridpads(20px);
+	}	
 	.gutters_r1 {
 		@include gridpads(4vw);
 	}
 
+	h4.bigger {font-size: 17px;}
+
 	.button {
+		@include trans();
 		text-decoration: none;
 		display: inline-block;
-		height: 36px;
-		width: 180px;
-		border: 1px solid $white;
-		background-color: $white;
+		height: 3em;
+		width: 12em;
+		//border: 1px solid $white;
+		//background-color: $red;
 		text-align: center;
 		border-radius: 0;
+		border: none;
 		span {
 			@include button();
 			@include valign(50%, -50%, relative);
@@ -42,24 +88,105 @@
 		}
 		&.fitted {
 			width: auto;
+			padding: 0 3em;
+		}
+		&.smol {
+			width: auto;
 			padding: 0 1em;
 		}
 		&:hover {
-			border: 1px solid $gray1;
-			background-color: $white;
-			span {color: $gray1;}
+
+		}
+		&.vip_button {
+			cursor: pointer;
+			&:hover {
+			}
 		}
 
+		&.bl {
+			width: auto;
+			display: block
+		}
+
+
+		&.red:hover {
+		}
+		&.w100 {
+			width: 100%;
+			padding: 0 1em;
+		}
 	}
-	.ulay {opacity:0.5;}
+	input.button {
+		color: $white;
+		&:hover {
+		}
+	}
+	.ulay {opacity:0.95;}
 	
+
+	.hellobar {
+		@include trans(all, 200ms, $quad);
+		position: fixed;
+		top: 0;
+		left:0;
+		z-index: 150;
+		height: 74px;
+		overflow: hidden;
+	}
+	.hb {
+		height: 74px;
+		overflow: hidden;
+		.container {padding: 10px 0px;}
+		.gold {margin-top:0.25em;}
+	}
+	.hello_x {
+		@include valign(50%, -50%, absolute);
+		right:20px;
+		cursor: pointer;
+		z-index: 100;
+
+	}
+
+	.hellobar:not(.closed)+header {
+		top: 74px;
+	}
+
+	.hellobar:not(.closed)+header~.headspace {
+		height: 169px;
+	}
+
+	.headroom--unpinned	.hellobar {
+		&+header {
+			//transform: translate(0, -100%);
+		}
+	}
+
+	.headroom--unpinned	.hellobar:not(.closed) {
+		height: 0px;
+		&+header {
+			top: 0px;
+		}
+		&+header+.headspace {
+			//transform: translate(0, -100%);
+		}
+	} 
+
+	.hellobar.closed, .hellobar.nav_closed {
+		transform: translate(0, -100%);
+		visibility: hidden;
+		&+header {
+			top: 0px;
+		}
+	} 
+
 
 	.lpane, .rpane {
 		position: fixed;
 		overflow: hidden;
 		top: 0;
-		width:0;
+		width:100%;
 		height: 100vh;
+		z-index: 180;
 	}
 	.lpane {
 		top: 0;
@@ -69,32 +196,234 @@
 		top: 0;
 		right: 0;
 	}
-
+	.pane {
+		width:100%;
+		height: calc(100vh - 75px);
+	}
+	.gutters_1 {
+		@include gridpads(20px);
+	}
 	.rpads {padding: 0 4.8vw;}
 
 	.container {
-		max-width: 1000px;
+		//max-width: 1060px;
+		max-width: 1600px;
 		padding: 0 20px;
 	}
 
 	.ltc, .rtc {
 		text-align: center;
 	}
-	.rtl {
+	.rtl, .rtlm {
 		text-align: left;
+	}
+	.ltr {
+		text-align: right;
 	}
 	.ctl {
 		text-align: left;
 	}
-
 
 	.img {
 		width: 100%;
 		height: auto;
 	}
 
+
+	header, .header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		
+		width: 100%;
+		
+		transform: translate(0, 0%);
+		
+	}
+	header, .header, .headspace {
+		@include trans(all);
+		height: 95px;
+	}
+
+
+	header {
+		background-color: $white;
+	}
+
+
+	.navicon {
+		font-size: 20px;
+		cursor: pointer;
+	}
+	header {
+		.navicon {
+			@include valign(auto, 0, static);
+		}
+	}
+
+
+	.pad_tile {
+		padding: 4em 6em 2em 5.5em;
+	}
+
+	.form_finish, .gform_confirmation_message {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+
+
+	.xb {
+		position: absolute;
+		top: 6em;
+		right: 3em;
+		cursor: pointer;
+	}
+
+	.icons {
+		height: 12px;
+		width: auto;
+	}
+
+	.ulay.ten {
+		opacity: 0.15;
+	}
+
+	.godown {
+		left: 0;
+		right:0;
+		margin: 0 auto;
+		bottom: 10px;
+	}
+
+	.nav_pane {
+		opacity: 0;
+	}
+
+	.av_col {
+
+	}
+	.av_row {
+		border-bottom: 1px solid $brown
+	}
+	.av_row_units {
+		display: none;
+	}
+
+	.in_plan {
+		.av_row_units {
+			display: block;
+			background-color: transparent;
+			border-bottom: none;
+		}
+
+	}
+	.plan_card {
+		margin-bottom: 100px;
+		padding-top: 30px
+	}
+	.img_wrap {
+		margin: 30px;
+	}
+
+	.cat_link {
+		&.active {
+		}
+	}
+
+
+	.date_picker {
+		border: none;
+
+		&.date_picker.flatpickr-input {
+			background-color: transparent;
+
+
+			@include placeholder($black);
+		}
+	}
+
+	#map {
+		width: 100%;
+		height: 46vw;
+		min-height: 400px;
+	}
+
+	.format-standard {
+		h1 {
+
+		}
+
+		h2 {
+
+		}
+
+		p {
+		}
+		h3, h4, h5, h6 {
+		}
+		ul {
+			padding-left: 2em;
+			list-style: outside disc;
+			margin-top: 1em;
+			margin-bottom: 1em;
+		}
+		li {
+			list-style: outside disc;
+		}
+	}
+
+	.hello {
+		color: $black;
+		a {
+			text-decoration: none;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
 }
 @media screen and (max-width: 640px) {
+
+	.logo {
+		transform: translate(0, 60%);
+	}
+
+	.key_image {
+		max-width: 160px;
+	}
+
+	.vpad {
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+
+	.av_row {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.av_row_units {
+		padding-top: 0px;
+	}
+	.av_header {
+		display: none;
+	}
+
+	.navicon {
+		right: 40px;
+		font-size: 20px;
+		text-align: right;
+	}
+
+	.nm {
+		display: none;
+	}
+
+	.hello_x {
+		right:8px;
+	}
 
 }
 @media screen and (min-width: 641px) {
@@ -104,11 +433,56 @@
 		@include gridpads(5vw);
 	}
 	.spacer100r {height:100px;}
+	.om {
+		display: none;
+	}
 
+
+	.mdl {
+		width: calc(100% - 150px);
+	}
+
+	.col_2 {
+		-webkit-columns: 2 auto;
+			-ms-columns: 2 auto;
+		   -moz-columns: 2 auto;
+				columns: 2 auto;
+		-webkit-column-gap: 20px;
+			-ms-columns-gap: 20px;
+		   -moz-column-gap: 20px;
+				column-gap: 20px;
+		.list {
+			display: inline-block;
+			width: 100%;
+		}
+	}
+
+	.av_row {
+		padding: 0.5rem 0;
+		
+		&:not(.av_row_unit) {
+			padding-left: calc(1rem);
+		}
+		.av_name {
+			
+			// idk white-space: nowrap;
+		}
+	}
 
 }
 @media screen and (max-width: 900px) {
-
+	#dabs {
+		padding-left:0px;
+	}
+	.hideonmobile {
+		display: none;
+	}
+	.hellobar {
+		.container {
+			padding-left: 2em;
+			padding-right: 2em;
+		}
+	}
 }
 @media screen and (min-width: 901px) {
 	#res {z-index: 3}
@@ -125,6 +499,9 @@
 	.rtl {
 		text-align: right;
 	}
+	.ltr {
+		text-align: left;
+	}
 	.ctl {
 		text-align: center;
 	}
@@ -132,20 +509,27 @@
 
 }
 
+@media screen and (min-width: 1061px) { // layout width is 1060px
+
+
+
+
+}
+
 @media screen and (min-width: 1601px) {
 
-	.bigbar {
-		//width: 1524px;
-		height: 624px;
-		padding: 64px;
-		&.minibar {
-			height: 312px;
-
-		}
+	.spacer50 {
+		padding-top: 75px;
+		padding-bottom: 75px;
 	}
 
 }
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 /* IE10+ CSS styles here. i know. */
+
+}
+
+@supports (display:-ms-grid) {
+
 }

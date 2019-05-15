@@ -4,21 +4,39 @@
 if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
 function my_jquery_enqueue() {
 
-    $q_string = '0.01';
+    $q_string = '1.8';
 
     wp_deregister_script('jquery');
     wp_deregister_script( 'wp-embed' );
     wp_register_script('jquery', get_bloginfo('template_url') . "/js/vendor/jquery-3.3.1.min.js", array(), $q_string, false);
-    wp_register_script('init', get_bloginfo('template_url') . "/js/init.js", array('jquery'), $q_string, true);
+    wp_register_script('init', get_bloginfo('template_url') . "/js/init.js", array('jquery', 'ffo'), $q_string, true);
     wp_register_script('plugins', get_bloginfo('template_url') . "/js/plugins.js", array('jquery'), $q_string, true);
     wp_register_script('main', get_bloginfo('template_url') . "/js/main.js", array('plugins'), $q_string, true);
-    
+
+    wp_register_script('ffo', get_bloginfo('template_url') . "/js/vendor/fontfaceobserver.js", array(), $q_string, true);
+    wp_register_script('flatpickr', get_bloginfo('template_url') . "/js/vendor/flatpickr.min.js", array(), $q_string, true);
     wp_register_style( 'crit', get_template_directory_uri() . '/css/crit.css', array(), $q_string, false );
 
+    wp_register_style( 'flatpickr', get_template_directory_uri() . '/css/flatpickr.min.css', array(), $q_string, false );
+    wp_register_style( 'fancybox', get_template_directory_uri() . '/css/jquery.fancybox.min.css', array(), $q_string, false );
 
+
+    if(is_page_template('page-availability.php') || is_page_template('plans.php') || is_page_template('single-plan.php') || is_singular(array('plan'))) {
+        wp_enqueue_script('flatpickr');
+        wp_enqueue_script( 'init', null, array( 'jquery','flatpickr' ));
+         wp_enqueue_style('flatpickr');
+    } else {
+        wp_enqueue_script( 'init');
+    }
+    
+    wp_enqueue_script('ffo');
     wp_enqueue_script('jquery');
-    wp_enqueue_script('init');
     wp_enqueue_style('crit');
+    
+    if(is_page_template('gallery.php') || is_page_template('page-availability.php')) {
+        wp_enqueue_style('fancybox');
+    }
+   
 
     wp_localize_script("init",
         "site",
@@ -35,6 +53,9 @@ function my_jquery_enqueue() {
         'post_id'  => get_the_id()
 
     ) );
+
+
+
 }
 
 // admin styles
@@ -59,15 +80,13 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
 
 // dequeue gravityforms scripts.
-add_action( 'gform_enqueue_scripts', 'dequeue_habuncha_scripts', 10, 2 );
+//add_action( 'gform_enqueue_scripts', 'dequeue_habuncha_scripts', 10, 2 );
 function dequeue_habuncha_scripts( $form, $is_ajax ) {
-    /*
     if ( is_front_page() || is_page('contact') ) {
         wp_dequeue_script( 'gform_gravityforms' );
         wp_dequeue_script( 'gform_json' );
         wp_dequeue_script( 'gform_placeholder' );
     }
-    */
 }
 
 add_filter( 'gform_ajax_spinner_url', 'spinner_url', 10, 2 );
@@ -80,6 +99,7 @@ function spinner_url( $image_src, $form ) {
 add_action( 'after_setup_theme', 'register_my_menu' );
 function register_my_menu() {
   register_nav_menu( 'main', 'Main Menu' );
+  register_nav_menu( 'secondary', 'Secondary Menu' );
 }
 
 // image sizes
@@ -91,6 +111,13 @@ if ( function_exists( 'add_theme_support' ) ) {
 
 
 
+// wild URL's
+add_action('init', 'custom_rewrite_basic');
+function custom_rewrite_basic() {  
+    $slug = 'gallery';
+    $id = 241;
+    add_rewrite_rule("^$slug\/.*$", "index.php?page_id=$id", 'top');
+}
 
 function ajax_gravityBoy() {
 
@@ -103,6 +130,35 @@ function ajax_gravityBoy() {
     die();
 }
 
+function custom_excerpt_length( $length ) {
+    return 20;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+function new_excerpt_more($more) {
+    return '...';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
+
+
+
+add_filter( 'wpiw_list_class', 'ig_list_class' );
+function ig_list_class( $classes ) {
+    $classes = "pure-g gutters_1";
+    return $classes;
+}
+
+add_filter( 'wpiw_item_class', 'ig_li_class' );
+function ig_li_class( $classes ) {
+    $classes = "instagram-image pure-u-sm-1-1 pure-u-md-1-2 pure-u-lg-1-5";
+    return $classes;
+}
+
+add_filter( 'wpiw_img_class', 'ig_img_class' );
+function ig_img_class( $classes ) {
+    $classes = "img";
+    return $classes;
+}
 
 
 function ajax_sampleApiCall() {
@@ -215,9 +271,147 @@ function my_template_redirect_2322()
 }
 */
 
+add_filter( 'manage_plan_posts_columns', 'smashing_filter_posts_columns' );
+function smashing_filter_posts_columns( $columns ) {
+
+    $columns = array(
+      'title' => __( 'Floor Plan ID' ),
+      'plan_name' => __( 'Name', 'smashing' ),
+      'author' => __( 'Author' ),
+      'date' => __( 'Date' ),
+      
+    );
+    $columns['plan_name'] = __( 'Name', 'smashing' );
+    return $columns;
+}
+add_action( 'manage_plan_posts_custom_column', 'smashing_posts_column', 10, 2);
+function smashing_posts_column( $column, $post_id ) {
+
+  if ( 'plan_name' === $column ) {
+    echo get_post_meta( $post_id, 'plan_name', true );
+
+  }
+}
+add_filter( 'manage_edit-plan_sortable_columns', 'smashing_posts_sortable_columns');
+function smashing_posts_sortable_columns( $columns ) {
+  $columns['plan_name'] = 'plan_name';
+  return $columns;
+}
+add_action( 'pre_get_posts', 'smashing_posts_orderby' );
+function smashing_posts_orderby( $query ) {
+  if( ! is_admin() || ! $query->is_main_query() ) {
+    return;
+  }
+
+  if ( 'plan_name' === $query->get( 'orderby') ) {
+    $query->set( 'orderby', 'meta_value' );
+    $query->set( 'meta_key', 'plan_name' );
+    $query->set( 'meta_type', 'CHAR' );
+  }
+}
 
 
-/*
+
+
+
+add_action( 'gform_after_submission', 'post_to_third_party', 10, 2 );
+function post_to_third_party( $entry, $form ) {
+
+    $rc_forms = array(1, 2);
+    $phone = '';
+    $apt = '';
+    $unit = '';
+
+    if(in_array($form['id'], $rc_forms)) {
+
+        foreach ( $form['fields'] as $field ) {
+
+            $type = $field['type'];
+            $label = $field['label'];
+
+            if($type == 'phone') {
+                if ( is_array( $inputs ) ) {
+                    foreach ( $inputs as $input ) {
+                        $phone = rgar( $entry, (string) $input['id'] );
+                    }
+                } else {
+                    $phone = rgar( $entry, (string) $field->id );
+                }
+                $phone = preg_replace('/\D+/', '', $phone);
+            }
+
+
+            if($label == 'I\'m interested in') {
+                $apt = rgar( $entry, (string) $field->id );
+
+                if($apt)
+                    $apt = 'Interested in '. $apt .' apartments. ';
+
+            } elseif($label == 'Apartment number') {
+                $unit = rgar( $entry, (string) $field->id );
+
+                $unit = 'Unit '.$unit. '. ';
+            }
+
+        }
+
+
+        $body = array(
+            'requestType'       => 'lead',
+            'firstName'         => rgar($entry, '1'),
+            'lastName'          => rgar($entry, '2'),
+            'email'             => rgar($entry, '7'),
+            'phone'             => $phone,
+            'message'           => rawurlencode($apt.$unit.rgar($entry, '5')),
+            'propertyCode'      => 'p0887244',
+            'username'          => 'apileads@berkshire.com',
+            'password'          => 'berkshireapi',
+            'source'            => 'property website',
+            'secondarySource'   => '',
+            'addr1'             => '1555 Ellinwood Ave',
+            'addr2'             => '',
+            'city'              => 'Des Plaines',
+            'state'             => 'IL',
+            'ZIPCode'           => '60016'
+        );
+
+
+
+        $post_url = '';
+        $post_url = 'https://api.rentcafe.com/rentcafeapi.aspx';
+        /*
+        $add_info = '';
+        $hear_about = '';
+        // values from the "hear about" field are collected from an array, then transposed into XML
+        $field_id = 1;
+        $field = RGFormsModel::get_field( $form["id"], $field_id );
+        $hearabouts = is_object( $field ) ? $field->get_value_export( $entry ) : '';
+        
+        $hearabouts = explode(', ', $hearabouts);
+        if($hearabouts[0] != '') {
+            foreach ($hearabouts as $ha) {
+                $hear_about .= '<value>'.$ha.'</value>';
+            }
+        } else { // if the user didn't select any interest fields, sign them up into these
+        }
+        */
+
+        // this is for logging
+        GFCommon::log_debug( 'gform_after_submission: body => ' . print_r( $body, true ) );
+        $request = new WP_Http();
+        $response = $request->post( $post_url, array( 'body' => $body, 'timeout' => 15 ) );
+        GFCommon::log_debug( 'gform_after_submission: response => ' . print_r( $response, true ) );
+    }
+}
+
+
+
+
+
+
+
+
+
 // comprehensive menu output
 class Menu_With_Description extends Walker_Nav_Menu {
     function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
@@ -225,32 +419,66 @@ class Menu_With_Description extends Walker_Nav_Menu {
         $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
         
         $class_names = $value = '';
-
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
-
         $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) );
         $class_names = ' class="' . esc_attr( $class_names ) . '"';
-
         $output .= $indent . '<li id="menu-item-'. $item->ID . '"' . $value . $class_names .'>';
-
         $attributes = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) .'"' : '';
         $attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) .'"' : '';
         $attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) .'"' : '';
         $attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) .'"' : '';
-
         $item_output = $args->before;
         $item_output .= '<a'. $attributes .'>';
         $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+        if($item->description)
+            $item_output .= '<div class="nav_desc p2">'. esc_attr( $item->description ) .'</div>';
         $item_output .= '</a>';        
-
         $item_output .= $args->after;
-
         $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
     }
 }
-*/
 /*
 // put this in your template nav call
 $walker = new Menu_With_Description; 
 'walker'          => $walker
 */
+
+
+add_action( 'init', 'register_cpt_plan' );
+function register_cpt_plan() {
+    $labels = array( 
+        'name' => _x( 'Plans', 'plan' ),
+        'singular_name' => _x( 'Plan', 'plan' ),
+        'add_new' => _x( 'Add New Plan', 'plan' ),
+        'add_new_item' => _x( 'Add New Plan', 'plan' ),
+        'edit_item' => _x( 'Edit Plan', 'plan' ),
+        'new_item' => _x( 'New Plan', 'plan' ),
+        'view_item' => _x( 'View Plan', 'plan' ),
+        'search_items' => _x( 'Search Plans', 'plan' ),
+        'not_found' => _x( 'No plans found', 'plan' ),
+        'not_found_in_trash' => _x( 'No plans found in Trash', 'plan' ),
+        'parent_item_colon' => _x( 'Parent Plan:', 'plan' ),
+        'menu_name' => _x( 'Plans', 'plan' ),
+    );
+    $args = array( 
+        'labels' => $labels,
+        'hierarchical' => false,
+        
+        'supports' => array( 'title', 'editor', 'excerpt', 'author', 'custom-fields', 'revisions' ),
+        'taxonomies' => array(),
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 20,
+        //'menu_icon' => 'placeholder_icon.jpg',
+        'show_in_nav_menus' => true,
+        'publicly_queryable' => true,
+        'exclude_from_search' => false,
+        'has_archive' => false,
+        'query_var' => true,
+        'can_export' => true,
+        'rewrite' => true,
+        'capability_type' => 'post'
+    );
+    register_post_type( 'plan', $args );
+}

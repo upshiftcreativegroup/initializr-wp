@@ -17,6 +17,11 @@ a[href^=tel] {color: inherit;} // fix for apple device telephone link display
 	@include trans(all, 0ms);
 }
 
+.img {
+	width: 100%;
+	height: auto;
+}
+
 .texttransno {text-transform: none!important;}
 
 .valign {@include valign(50%);}
@@ -34,6 +39,16 @@ body {
 	text-decoration: none;
 	&:hover {text-decoration: underline;}
 }
+.vmid, [class*=pure-u].vmid {
+	vertical-align: middle
+}
+.vbot, [class*=pure-u].vbot {
+	vertical-align: bottom
+}
+.vtop, [class*=pure-u].vtop {
+	vertical-align: top
+}
+
 .nun {text-decoration: none;}
 .nom {margin:0;}
 .bg {
@@ -54,7 +69,7 @@ body {
 .abs {position: absolute;}
 
 .oflo {overflow: hidden;}
-
+.w100 {width: 100%;}
 
 .object_fit {
 	height: 100%;
@@ -68,19 +83,64 @@ img.object_fit {
 	object-fit: cover;
 }
 
+.padme {
+	padding-left: 50px;
+	padding-right: 50px;
+}
+.vpad {
+	padding-top: 100px;
+	padding-bottom: 100px;
+	&.ot {
+		padding-bottom: 0;
+	}
+}
+.svpad {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
 
+.nowrap {
+	white-space: nowrap;
+}
+.vw {
+	width: 100vw;
+	max-width:100%;
+}
 
 .bl {display: block;}
 
 .black {color: $black;}
 .white {color: $white;}
+.blue {color: $blue;}
+.moss {color: $moss;}
+.bone {color: $bone;}
+.bone1 {color: $bone1;}
+.bone2 {color: $bone2;}
+.bonet {color: $bonet;}
+.bone3 {color: $bone3;}
+.bone4 {color: $bone4;}
 .gray1 {color: $gray1;}
+.gray2 {color: $gray2;}
+.gray3 {color: $gray3;}
+.red {color: $red;}
+.brown {color: $brown;}
+.charcoal {color: #444444;}
 
 .block {
 	&.white {background-color: $white;}
 	&.black {background-color: $black;}
+	&.blue {background-color: $blue;}
+	&.moss {background-color: $moss;}
+	&.bone {background-color: $bone;}
+	&.bone1 {background-color: $bone1;}
+	&.bone2 {background-color: $bone2;}
+	&.bonet {background-color: $bonet;}
+	&.bone3 {background-color: $bone3;}
+	&.bone4 {background-color: $bone4;}
 	&.gray1 {background-color: $gray1;}
-
+	&.gray2 {background-color: $gray2;}
+	&.gray3 {background-color: $gray3;}
+	&.red {background-color: $red;}
+	&.brown {background-color: $brown;}
 	&.transparent {background-color: transparent;}
-
 }

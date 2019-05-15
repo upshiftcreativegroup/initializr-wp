@@ -1,161 +1,135 @@
-@import 'variables.scss';
+@import 'vars.scss';
 
 /*! main */
 
 @media only screen and (min-width: 1px) {
-	
-	ul, li {
-		list-style: none outside;
-		margin: 0;
-		padding: 0;
+	.page-template-page-availability .fancybox-content {
+		background-color: $bone4;
 	}
-
-	h1, .h1 {@include h1();}
-	h2, .h2 {@include h2();}
-	h3, .h3 {@include h3();}
-	h4 {margin-bottom: 0.6em;}
-	p, .p1 {@include p();}
-
-	.logged-in.admin-bar header, .logged-in.admin-bar .header {
-		top: 32px;
-	}
-
-	.mc_embed_signup_scrol {
-		position: relative;
-		width: 200px;
-		background-color: $white;
-	}
-	.mc-field-group .email {
-		@include button();
-		display: inline-block;
-		height: 36px;
-		width:calc(100% - 34px);
-		border:0;
-		border-radius: 0;
-		//color: $gray1;
-		padding-left: 5px;
-		@include placeholder($gray1);
-	}
-	#mc-embedded-subscribe {
-		@include p();
-		right: 0;
-		background-color: transparent;
-		display: inline-block;
-		//color: $gray1;
-		width:32px;
-		height:36px;
-		border-radius: 0;
-		border: none;
-	}
-
-	.map-button {
-		display: block;
-		padding: 0.2em 0;
-		cursor: pointer;
-	}
-	.map-wrap-left {
+	.logo {
 		@include trans();
-		@include valign(50%, -50%, absolute);
-		overflow: hidden;
-		height: 30px;
-		width: 30px;
-		background-color: $white;
-		padding: 3px 3px;
-		.map-buttons-full-head {text-align: center;}
-		&.active {
-			.map-buttons-full-head {text-align: right;}
-			height: 270px;
-			width: 200px;
-			padding: 5px 10px;
+	}
+	.headroom--unpinned {
+		header, .header, {
+			height: 50px;
+		}
+		.logo {
+			//max-width: 113px;
+			//transform: translate(0,-25%);
 		}
 	}
-
-	#map-buttons {
-		width: 156px;
-		margin: 0 auto;
-	}
-	.map-buttons-full-head {text-align: right; font-size: 20px; color: $gray1; cursor: pointer;}
-	.map-buttons-mobile-head {display: none;}
-	.inactive-button {display:inline;}
-	.active-button {display:none;}
-	.active {
-		.inactive-button {display:none;}
-		.active-button {display:inline;}
+	.logged-in.admin-bar header, .logged-in.admin-bar .header {
+		top: 74px;
 	}
 	
-	.gal_cap {
-		@include trans(opacity, 200ms, linear, 100ms);
-
-		opacity: 0;
-		color: $white;
-		text-shadow: 0px 0px 10px rgba(0,0,0, 0.5);
-		h2 {@include h2(14px);}
+	
+	.content .button:hover {
+		background-color: $moss;
 	}
-
 	.balign {
 		@include valign(100%, -100%, absolute);
 		padding: 0 0 10px 10px;
 	}
 
-
+	p > a, .list > div > a {
+		color: inherit;
+	}
 	.gform_wrapper {text-align:left;}
 	
 	.gform_body {
-	    margin-left: -10px;
+	    margin-left: -20px;
 		li {
-			padding-left: 10px;
+			padding-left: 20px;
 		}
 	}
 	.gfield {
+		@include form();
 		opacity: 1;
 		display: inline-block;
 		width: 100%;
-		margin: 0 0 25px 0;
+		margin-bottom: -1em;
+		vertical-align: top;
 		label {
-			@include sec_nav();
+			@include trans();
+			@include form();
+			position: relative;
 			display: block;
-			margin-bottom: 0.5em;
-			color: $white;
-			text-shadow: 0px 0px 5px rgba(0,0,0, 0.2);
+			color: $gray2;
+			transform: translate(0, 100%);
+			padding-left:0em;
+			z-index: 50;
+		}
+		.ginput_container {
+			position: relative;
+			z-index: 80;
 		}
 		input, textarea, select {
-			@include p();
-			//@include placeholder($white);
+			@include form();
 			width: 100%;
 			padding-left:1em;
-			color: $white;
+			color: $gray2;
 			border-radius: 0;
-			height:2.8em;
-			border: 2px solid $white;
+			height: 3.167em;
+			border: none;
+			border-bottom: 1px solid $gray2;
 			background-color: transparent;
 			-webkit-appearance: none;
 			-webkit-border-radius: 0px;
 			vertical-align: top;
 		}
 		textarea {
-			height:8em;
+			border: 1px solid $gray2;
+			height:6em;
 		}
 		option {color: $black;}
+		.nice-select .current {
+			@include form();
+			color: inherit;
+		}
+		&.textarea {
+			label {
+				left: 1em;
+			}
+		}
 
 		&.gform_hidden {display:none;}
 
 		&.gfield_error {
 			input, textarea, select, option {
-				border: 1px solid red;
-				@include placeholder(red);
+				//border: 1px solid $red;
+				@include placeholder($red);
 			}
 		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&.textarea {
+			@include trans();
+			opacity: 1;
+			margin-top:2em;
+			&.bye {
+				opacity: 0;
+			}
+		}
+	} // .gfield
+
+	label.label_focus {
+		transform: translate(0, 35%);
+		z-index: 100;
 	}
+
 	.ginput_container_select {
 		z-index: 10;
 		position: relative;
 		&::after {
+			display: none;
 			content: "\f107";
-			font-family: "FontAwesome";
+			font-family: "Font Awesome 5 Pro";
 			@include valign(50%, -50%, absolute);
-			right: 10px;
+			right: 2em;
 			z-index: 10;
-			font-size: 30px;
+			font-size: 1.5em;
 			color: $white;
 		}
 		select {
@@ -186,12 +160,17 @@
 	.gform_footer {
 		text-align: right;
 		input {
-			@include button();
-			background-color: $white;
-			color: $gray1;
+			////@include button2();
+			//background-color: $red;
+			//color: $white;
+			border: none;
 		}
 	}
-	.validation_message, .validation_error {
+	.validation_message {
+		display: block;
+		color: $red;
+	}
+	.validation_error {
 		display: none;
 	}
 	.gform_confirmation_wrapper {
@@ -243,13 +222,247 @@
 	    padding: 0 4px 5px;
 	}
 
+	.gform_footer {
+		padding-top: 30px;
+	}
 
+
+
+	.xb {
+		@include trans(color);
+		&:hover {
+			color: $red;
+		}
+	}
+	.slick-initialized .customprev, .slick-initialized .customnext {
+		@include trans();
+		@include valign(50%, -50%, absolute);
+		color: $gray4;
+		opacity: 0.8;
+		font-size:75px;
+		z-index:130;
+		text-shadow: 1px 1px 5px rgba(0,0,0, 0.1);
+		cursor: pointer;
+		z-index: 150;
+	}
+	.customprev {
+		left:20px;
+	}
+	.customnext {
+		right:20px;
+	}
+
+	.menu-main-menu {
+		li {
+		}
+		a {
+			@include trans();
+			display: block;
+			color: $white;
+			text-decoration: none;
+			padding-top: 0.15em;
+			padding-bottom: 0.15em;
+
+			&:hover {
+			}
+		}
+	}
+	.menu-secondary-menu {
+		margin-top: 30px;
+		li {
+		}
+		a {
+			@include trans();
+			display: block;
+			text-decoration: none;
+			padding-top: 0.5em;
+			padding-bottom: 0.5em;
+
+			&:hover {
+			}
+		}
+	}
+
+
+	.socials {
+		a {
+			color: inherit;
+			padding: 0 0.25em;
+			&:first-child {
+				padding-left: 0;
+			}
+			&:last-child {
+				padding-right: 0;
+			}
+		}
+	}
+	.socials {
+	    vertical-align: middle;
+	}
+	body img.gform_ajax_spinner {
+	 display: none !important;
+	}
+
+
+
+	.ofv {
+		overflow: visible;
+	}
+
+	.navx {
+		top: 30px;
+		right:30px;
+		position: absolute;
+	}
+	.nav_pane {
+		@include trans();
+		transform: translate(100%, 0);
+		&.active {
+			opacity: 1;
+			transform: translate(0%, 0);
+		}
+	}
+	.av_row_units {
+		background-color: $bone2;
+	}
+	.av_row_unit {
+		&:last-child {
+			padding-bottom:0;
+			border-bottom: none;
+		}
+	}
+
+	
+	.transing {
+		opacity: 0;
+
+		.gallery_img {
+			transform: translate(-100%, 0);
+
+			&:nth-child(4n+2), &:nth-child(4n+3) {
+				transform: translate(100%, 0);
+			}
+			&.pure-u-sm-1-1 {
+				transform: translate(0, 100%);
+			}
+		}
+		
+	}
+	.flatpickr-input {
+		width: 100%;
+	}
+
+	.specials_ul {
+		list-style: outside disc;
+		padding-left: 2em;
+		
+		li {
+
+			list-style: outside disc;margin-bottom: 0.333em;
+
+		}
+		
+	}
+
+	.plan_selected {
+		background-color: $bone1;
+		& + .av_row_units .av_row {
+			border-bottom-color: $bone4;
+		}
+	}
+	.map-wrap-left {
+		&.active {
+			//height: 290px;
+			width: 100%;
+		}
+	}
+
+	.map-buttons {
+		padding: 30px 0;
+
+		.map-button {
+			display: block;
+			padding: 1em 1em;
+			cursor: pointer;
+		}
+	}
+
+	
+	.form_step {
+		display: none;
+		&.active {
+			display: block;
+		}
+	}
+
+	.av_header {
+		.av_col {
+		}
+	}
+
+	.map-button {
+		&:hover {
+			color: $brown;
+		}
+		&.active {
+			color: $red;
+		}
+	}
+
+	.av_col {
+		.fa-angle-down {
+			@include trans(transform);
+		}
+	}
+	.plan_selected {
+		.fa-angle-down {
+			transform: rotate(-90deg);
+		}
+	}
+	.av_link {
+		a {
+			padding: 0.25em 0;
+			display: inline-block;
+		}
+	}
+	.marker_main {
+		width:106px;
+		height: auto;
+	}
+	.instagram-image {
+		margin-bottom: 20px;
+	}
+
+	.av_row_plan .av_name, .av_row_plan .av_spec {
+		cursor: pointer;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }
 @media screen and (max-width: 640px) {
+	.slick-initialized .customprev, .slick-initialized .customnext {
+		opacity: 0;
+	}
+	.xb {
+		right: 1em;
+	}
+	.nice-select:after {
+		right: 1em;
+	}
 
+
+	.marker_main {
+		width: 53px;
+		height: auto;
+	}
 
 }
 @media screen and (min-width: 641px) {
+
+	.cl_list {
+		display: block!important;
+	}
 
 	.gform_wrapper {
 
@@ -260,9 +473,7 @@
 			}
 		}
 	}
-	.gform_footer {
-		padding-top:20px;
-	}
+
 
 	.tblock {display: table;}
 	.tcell {display: table-cell; vertical-align: middle;}
@@ -306,26 +517,59 @@
 	    margin-left: auto;
 	    margin-right: auto;
 	}
-	.map-wrap-left {
-		&.active {
-			height: 290px;
-			width: 290px;
+
+	.map-buttons {
+		//display: table;
+		//table-layout: fixed;
+		.map-button {
+			//display: table-cell;
+			display: inline-block;
+			padding: 1em 0.5em;
+			cursor: pointer;
 		}
 	}
 
 }
-
-@media screen and (min-width: 901px) {
+@media screen and (max-width: 900px) {
+	.socials, .foot_text {
+		display: block;
+		margin-top: 1em;
+	}
+	footer {
+		height: auto;
+		padding: 16px 0;
+	}
+	footer .valign {
+		@include valign(auto, 0, static);
+	}
 
 }
-@media screen and (min-width: 1061px) {
+@media screen and (min-width: 901px) {
+	footer .socials {
+		padding-left: 1em;
+	}
+	.map-buttons {
+
+		.map-button {
+
+			padding: 1em 1em;
+		}
+	}
+}
+
+
+
+@media screen and (min-width: 1061px) { // layout width is 1060px
+
 
 }
 
 @media screen and (min-width: 1601px) {
 
-
-
+	.vpad {
+		padding-top: 50px;
+		padding-bottom: 160px;
+	}
 }
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 /* IE10+ CSS styles here. i know. */
